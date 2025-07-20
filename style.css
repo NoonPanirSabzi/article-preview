@@ -68,11 +68,20 @@ main {
 
 .content {
   padding-inline: 32px;
-  padding-block: 36px 20px;
+  padding-block: 36px 0;
 }
 
 .content > p {
-  margin-block: 12px 32px;
+  margin-block: 12px 0;
+}
+
+.profile-wrapper {
+  padding-block-start: 12px;
+}
+
+.profile-wrapper > div {
+  padding-inline: 32px;
+  padding-block: 20px;
 }
 
 .profile {
@@ -87,14 +96,51 @@ main {
   border-radius: 50%;
 }
 
-.share-button {
+.share-btn {
   margin-left: auto;
-  background-color: rgba(236, 242, 248, 1);
   border: none;
   border-radius: 50%;
   padding: 9px;
 }
 
+.share-btn--light {
+  background-color: rgba(236, 242, 248, 1);
+}
+
+.share-btn--light:hover {
+  background-color: var(--color-text);
+  cursor: pointer;
+}
+
+.share-btn--light:hover path {
+  fill: var(--color-article-bg);
+}
+
+.social-block {
+  background-color: var(--color-heading);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-block > p {
+  margin-inline-end: 5px;
+  letter-spacing: 5px;
+  color: var(--color-text-light);
+}
+
+.share-btn--dark {
+  background-color: var(--color-text);
+}
+
+.share-btn--dark:hover {
+  cursor: pointer;
+  background-color: #ecf2f8;
+}
+
+.share-btn--dark:hover path {
+  fill: var(--color-text);
+}
 
 /* utility classes */
 .margin-block-0 {
