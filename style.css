@@ -1,0 +1,109 @@
+:root {
+  /* Color */
+  --color-heading: #48556a;
+  --color-text: #6e8098;
+  --color-body-bg: #ecf2f8;
+  --color-text-light: #9daec2;
+  --color-article-bg: #ffffff;
+}
+
+/* Typography */
+.manrope {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1 {
+  font-weight: bold;
+  /* clamp functions reach maximum at 768px (tablet breakpoint) */
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  line-height: clamp(1.5rem, 3.64vw, 1.75rem);
+  letter-spacing: clamp(0.2px, 0.0325vw, 0.25px);
+  color: var(--color-heading);
+}
+
+h2 {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.12px;
+  font-weight: bold;
+  color: var(--color-heading);
+}
+
+p {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.12px;
+}
+
+.content > p {
+  color: var(--color-text);
+}
+
+.profile p {
+  color: var(--color-text-light);
+}
+
+/* Layout */
+body {
+  margin: 0;
+  background-color: var(--color-body-bg);
+}
+
+main {
+  padding: 74px 24px;
+}
+
+.component {
+  max-inline-size: 20.5rem;
+  box-sizing: content-box;
+  margin-inline: auto;
+  background-color: var(--color-article-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 40px 40px -10px rgba(201, 213, 225, 0.5034);
+}
+
+.content {
+  padding-inline: 32px;
+  padding-block: 36px 20px;
+}
+
+.content > p {
+  margin-block: 12px 32px;
+}
+
+.profile {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.profile > img {
+  max-inline-size: 40px;
+  max-block-size: 40px;
+  border-radius: 50%;
+}
+
+.share-button {
+  margin-left: auto;
+  background-color: rgba(236, 242, 248, 1);
+  border: none;
+  border-radius: 50%;
+  padding: 9px;
+}
+
+
+/* utility classes */
+.margin-block-0 {
+  margin-block: 0;
+}
+
+/* 
+   hide class has higher priority than other classes because it comes later in css
+*/
+.hide {
+  display: none;
+}
