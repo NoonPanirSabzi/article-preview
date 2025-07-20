@@ -84,6 +84,7 @@ main {
   padding-block: 20px;
 }
 
+  padding-block: 17px;
 .profile {
   display: flex;
   gap: 16px;
@@ -117,6 +118,7 @@ main {
 }
 
 .social-block {
+  padding-block: 20px;
   background-color: var(--color-heading);
   display: flex;
   align-items: center;
