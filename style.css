@@ -38,7 +38,7 @@ p {
   letter-spacing: 0.12px;
 }
 
-.content > p {
+.text-wrapper > p {
   color: var(--color-text);
 }
 
@@ -66,12 +66,12 @@ main {
   box-shadow: 0 40px 40px -10px rgba(201, 213, 225, 0.5034);
 }
 
-.content {
+.text-wrapper {
   padding-inline: 32px;
   padding-block: 36px 0;
 }
 
-.content > p {
+.text-wrapper > p {
   margin-block: 12px 0;
 }
 
@@ -79,7 +79,10 @@ main {
   padding-block-start: 12px;
 }
 
-.profile-wrapper > div {
+/* where doesn't increase specificity and is suitable for later
+   when I want to override the padding-inline property in desktop layout
+*/
+:where(.profile, .social-block) {
   padding-inline: 32px;
 }
 
@@ -96,8 +99,15 @@ main {
   border-radius: 50%;
 }
 
-.share-btn {
+.profile-share-btn-wrapper {
   margin-left: auto;
+}
+
+.social-share-btn-wrapper {
+  margin-left: auto;
+}
+
+.share-btn {
   border: none;
   border-radius: 50%;
   padding: 9px;
@@ -149,8 +159,7 @@ main {
 }
 
 .fade-toggle {
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
-    height 0.3s ease-in-out;
+  transition: opacity 0.45s;
   opacity: 1;
   visibility: visible;
   overflow: hidden;
@@ -162,4 +171,78 @@ main {
   height: 0;
   pointer-events: none;
   padding: 0;
+}
+
+/* Desktop Breakpoint */
+
+/* 64em = 1024px assuming 1em = 16px */
+@media (min-width: 64em) {
+  main {
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .component {
+    display: flex;
+    max-inline-size: fit-content;
+    /* overflow must be visible so the socialBlock can overflow it */
+    overflow: visible;
+  }
+
+  .img-wrapper {
+    overflow: hidden;
+    border-start-start-radius: 10px;
+    border-end-start-radius: 10px;
+  }
+
+  .img-wrapper img {
+    height: 100%;
+  }
+
+  .content {
+    max-inline-size: 27.8125rem;
+  }
+
+  .text-wrapper {
+    padding-inline: 40px;
+    padding-block: 32px 0;
+  }
+
+  .profile-wrapper {
+    padding-block-start: 0;
+  }
+
+  .profile {
+    padding-block: 20px 32px;
+    padding-inline: 40px;
+  }
+
+  .profile-share-btn-wrapper {
+    /* this enables us to position socialBlock element relative to 
+    shareBtn in the profile block */
+    position: relative;
+  }
+
+  .social-block {
+    border-radius: 10px;
+    padding-inline: 36px;
+    padding-block: 18px;
+    box-shadow: 0 10px 10px 0 rgba(201, 213, 225, 0.5034);
+    /* positions relative to profileShareBtn */
+    position: absolute;
+    z-index: 1;
+    bottom: calc(100% + 28px);
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .social-share-btn-wrapper {
+    display: none;
+  }
+
+  .fade-toggle {
+    overflow: visible;
+  }
 }

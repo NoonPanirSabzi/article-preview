@@ -1,12 +1,28 @@
-const profileBlock = document.getElementById("profileBlock");
-const socialBlock = document.getElementById("socialBlock");
-const shareBtns = document.getElementsByClassName("share-btn")
+// 64em = 1024px assuming 1em = 16px
+const isDesktop = window.matchMedia("(min-width: 64em)");
 
-for (let index = 0; index < shareBtns.length; index++) {
-  const btn = shareBtns[index];
-  btn.addEventListener("click", () => {
-    profileBlock.classList.toggle("hide");
-    socialBlock.classList.toggle("hide");
-  })
+const profileBlock = document.getElementById("profileBlock");
+const profileShareBtn = document.getElementById("profileShareBtn");
+
+const socialBlock = document.getElementById("socialBlock");
+const socialShareBtn = document.getElementById("socialShareBtn");
+
+function handleShareBtnMobile() {
+  profileBlock.classList.toggle("hide");
+  socialBlock.classList.toggle("hide");
 }
 
+function handleShareBtnDesktop() {
+  socialBlock.classList.toggle("hide");
+}
+
+if (isDesktop.matches) {
+  const profileShareBtnWrapper = profileBlock.querySelector(
+    ".profile-share-btn-wrapper"
+  );
+  profileShareBtnWrapper.appendChild(socialBlock);
+  profileShareBtn.addEventListener("click", handleShareBtnDesktop);
+} else {
+  profileShareBtn.addEventListener("click", handleShareBtnMobile);
+  socialShareBtn.addEventListener("click", handleShareBtnMobile);
+}
