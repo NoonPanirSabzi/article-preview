@@ -42,7 +42,7 @@ p {
   color: var(--color-text);
 }
 
-.profile p {
+.author-details p {
   color: var(--color-text-light);
 }
 
@@ -75,35 +75,31 @@ main {
   margin-block: 12px 0;
 }
 
-.profile-wrapper {
+.author-section {
   padding-block-start: 12px;
 }
 
-/* where doesn't increase specificity and is suitable for later
+/* :where doesn't increase specificity and is suitable for later
    when I want to override the padding-inline property in desktop layout
 */
-:where(.profile, .social-block) {
+:where(.author-details, .social-share-panel) {
   padding-inline: 32px;
 }
 
-.profile {
+.author-details {
   padding-block: 17px;
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
-.profile > img {
+.author-details > img {
   max-inline-size: 40px;
   max-block-size: 40px;
   border-radius: 50%;
 }
 
-.profile-share-btn-wrapper {
-  margin-left: auto;
-}
-
-.social-share-btn-wrapper {
+.share-btn-container {
   margin-left: auto;
 }
 
@@ -126,7 +122,7 @@ main {
   fill: var(--color-article-bg);
 }
 
-.social-block {
+.social-share-panel {
   padding-block: 20px;
   background-color: var(--color-heading);
   display: flex;
@@ -134,7 +130,7 @@ main {
   gap: 16px;
 }
 
-.social-block > p {
+.social-share-panel > p {
   margin-inline-end: 5px;
   letter-spacing: 5px;
   color: var(--color-text-light);
@@ -154,7 +150,7 @@ main {
 }
 
 /* utility classes */
-.margin-block-0 {
+.mb-0 {
   margin-block: 0;
 }
 
@@ -187,7 +183,7 @@ main {
   .component {
     display: flex;
     max-inline-size: fit-content;
-    /* overflow must be visible so the socialBlock can overflow it */
+    /* overflow must be visible so the social share panel can overflow it */
     overflow: visible;
   }
 
@@ -210,27 +206,26 @@ main {
     padding-block: 32px 0;
   }
 
-  .profile-wrapper {
+  .author-section {
     padding-block-start: 0;
   }
 
-  .profile {
+  .author-details {
     padding-block: 20px 32px;
     padding-inline: 40px;
   }
 
-  .profile-share-btn-wrapper {
-    /* this enables us to position socialBlock element relative to 
-    shareBtn in the profile block */
+  .author-details > .share-btn-container {
+    /* Position social share panel relative to the share button in author-details */
     position: relative;
   }
 
-  .social-block {
+  .social-share-panel {
     border-radius: 10px;
     padding-inline: 36px;
     padding-block: 18px;
     box-shadow: 0 10px 10px 0 rgba(201, 213, 225, 0.5034);
-    /* positions relative to profileShareBtn */
+    /* positions relative to #author-profile-btn */
     position: absolute;
     z-index: 1;
     bottom: calc(100% + 28px);
@@ -238,7 +233,7 @@ main {
     transform: translateX(50%);
   }
 
-  .social-share-btn-wrapper {
+  .social-share-panel > .share-btn-container {
     display: none;
   }
 
