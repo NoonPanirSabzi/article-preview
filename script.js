@@ -1,64 +1,69 @@
 // 64em = 1024px assuming 1em = 16px
 const isDesktop = window.matchMedia("(min-width: 64em)");
 
-const authorSection = document.getElementById("author-section");
+const elements = {
+  authorSection: document.getElementById("author-section"),
+  authorProfile: document.getElementById("author-profile"),
+  authorProfileBtn: document.getElementById("author-profile-btn"),
+  sharePanel: document.getElementById("social-share-panel"),
+  socialPanelBtn: document.getElementById("social-panel-btn"),
+  profileBtnContainer: document.getElementById("profile-btn-container"),
+};
 
-const authorProfile = document.getElementById("author-profile");
-const authorProfileBtn = document.getElementById("author-profile-btn");
-const profileShareBtnContainer = authorProfile.querySelector(
-  ".share-btn-container"
-);
+function toggleSharePanel() {
+  elements.sharePanel.classList.toggle("hide");
 
-const socialSharePanel = document.getElementById("social-share-panel");
-const socialPanelBtn = document.getElementById("social-panel-btn");
-
-function handleShareBtnMobile() {
-  authorProfile.classList.toggle("hide");
-  socialSharePanel.classList.toggle("hide");
-}
-
-function handleShareBtnDesktop() {
-  socialSharePanel.classList.toggle("hide");
-}
-
-// Initial event listeners
-if (isDesktop.matches) {
-  profileShareBtnContainer.appendChild(socialSharePanel);
-  authorProfileBtn.addEventListener("click", handleShareBtnDesktop);
-} else {
-  authorProfileBtn.addEventListener("click", handleShareBtnMobile);
-  socialPanelBtn.addEventListener("click", handleShareBtnMobile);
-}
-
-// Screen width Resizes
-isDesktop.addEventListener("change", (e) => {
-  if (e.matches) {
-    // Mobile --> Desktop
-    // first, remove event listeners that were for mobile
-    authorProfileBtn.removeEventListener("click", handleShareBtnMobile);
-    socialPanelBtn.removeEventListener("click", handleShareBtnMobile);
-    // then, relocate the socialSharePanel element
-    profileShareBtnContainer.appendChild(socialSharePanel);
-    // check if, social panel was open(=not hide) in mobile, if yes,
-    // author profile, which was hide in mobile, should unhide
-    if (!socialSharePanel.classList.contains("hide")) {
-      authorProfile.classList.toggle("hide");
-    }
-    // finally, add the click event to authorProfileBtn
-    authorProfileBtn.addEventListener("click", handleShareBtnDesktop);
-  } else {
-    // Desktop --> Mobile
-    // first, remove event listener that were for desktop
-    authorProfileBtn.removeEventListener("click", handleShareBtnDesktop);
-    // then, relocate the socialSharePanel element
-    authorSection.appendChild(socialSharePanel);
-    // check if, social panel was open(=not hide) in desktop, if yes,
-    // author profile, which is always visible in desktop, should hide
-    if (!socialSharePanel.classList.contains("hide")) {
-      authorProfile.classList.toggle("hide");
-    }
-    // finally, add mobile event listeners
-    authorProfileBtn.addEventListener("click", handleShareBtnMobile);
-    socialPanelBtn.addEventListener("click", handleShareBtnMobile);
+  if (!isDesktop.matches) {
+    elements.authorProfile.classList.toggle("hide");
   }
-});
+}
+
+function initialSetup(isDesktopView) {
+  // Move share panel to appropriate container in Desktop
+  if (isDesktopView) {
+    elements.profileBtnContainer.appendChild(elements.sharePanel);
+  }
+
+  // Add event listeners
+  elements.authorProfileBtn.addEventListener("click", toggleSharePanel);
+  if (!isDesktopView) {
+    elements.socialPanelBtn.addEventListener("click", toggleSharePanel);
+  }
+}
+
+function updateLayout(isDesktopView) {
+  // Remove all existing event listeners
+  elements.authorProfileBtn.removeEventListener("click", toggleSharePanel);
+  elements.socialPanelBtn?.removeEventListener("click", toggleSharePanel);
+
+  // Check and maintain share panel state
+  const isSharePanelVisible = !elements.sharePanel.classList.contains("hide");
+
+  // Move share panel to appropriate container
+  const container = isDesktopView
+    ? elements.profileBtnContainer
+    : elements.authorSection;
+  container.appendChild(elements.sharePanel);
+
+  // Maintain share panel state
+  if (isSharePanelVisible) {
+    elements.sharePanel.classList.remove("hide");
+    if (!isDesktopView) {
+      elements.authorProfile.classList.add("hide");
+    } else {
+      elements.authorProfile.classList.remove("hide");
+    }
+  }
+
+  // Add new event listeners
+  elements.authorProfileBtn.addEventListener("click", toggleSharePanel);
+  if (!isDesktopView) {
+    elements.socialPanelBtn.addEventListener("click", toggleSharePanel);
+  }
+}
+
+// Initial setup
+initialSetup(isDesktop.matches);
+
+// Handle resize
+isDesktop.addEventListener("change", (e) => updateLayout(e.matches));
