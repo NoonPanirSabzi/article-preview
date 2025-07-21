@@ -39,6 +39,11 @@ isDesktop.addEventListener("change", (e) => {
     socialPanelBtn.removeEventListener("click", handleShareBtnMobile);
     // then, relocate the socialSharePanel element
     profileShareBtnContainer.appendChild(socialSharePanel);
+    // check if, social panel was open(=not hide) in mobile, if yes,
+    // author profile, which was hide in mobile, should unhide
+    if (!socialSharePanel.classList.contains("hide")) {
+      authorProfile.classList.toggle("hide");
+    }
     // finally, add the click event to authorProfileBtn
     authorProfileBtn.addEventListener("click", handleShareBtnDesktop);
   } else {
@@ -47,6 +52,11 @@ isDesktop.addEventListener("change", (e) => {
     authorProfileBtn.removeEventListener("click", handleShareBtnDesktop);
     // then, relocate the socialSharePanel element
     authorSection.appendChild(socialSharePanel);
+    // check if, social panel was open(=not hide) in desktop, if yes,
+    // author profile, which is always visible in desktop, should hide
+    if (!socialSharePanel.classList.contains("hide")) {
+      authorProfile.classList.toggle("hide");
+    }
     // finally, add mobile event listeners
     authorProfileBtn.addEventListener("click", handleShareBtnMobile);
     socialPanelBtn.addEventListener("click", handleShareBtnMobile);
