@@ -136,6 +136,10 @@ main {
   color: var(--color-text-light);
 }
 
+.social-share-panel__down-arrow {
+  display: none;
+}
+
 .share-btn--dark {
   background-color: var(--color-text);
 }
@@ -235,6 +239,19 @@ main {
 
   .social-share-panel > .share-btn-container {
     display: none;
+  }
+
+  .social-share-panel__down-arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 12px solid var(--color-heading);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    position:absolute;
+    bottom:-12px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .fade-toggle {
