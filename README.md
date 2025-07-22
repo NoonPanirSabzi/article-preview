@@ -7,7 +7,6 @@
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Inspired by](#inspired-by)
 
@@ -19,23 +18,53 @@
 | ------------------------------------------- | ----------------------------------------- |
 | ![desktop](/images/desktop-screenshot.jpeg) | ![Mobile](/images/mobile-screenshot.jpeg) |
 
-[Live Site URL](Link)
+[Live Site URL](https://noonpanirsabzi.github.io/article-preview/)
 
 ## My process
 
 ### Built with
 
-- ?
+- JavaScript!😀
 
 ### What I learned
 
-#### ?:
+1. The `getElementById` method is only available on the `document` object. If you want to search within a specific DOM node, use methods like `querySelector`, `querySelectorAll`, or `getElementsByClassName`. This is because IDs are unique across the entire document by design.
 
-1. ?
+2. Creating a toggle effect with a fade transition in CSS:
 
-### Useful resources
+   ```css
+   .fade-toggle {
+     transition: opacity 0.45s;
+     opacity: 1;
+     visibility: visible;
+     overflow: hidden;
+   }
 
-- [title](link): explanation
+   .fade-toggle.hide {
+     opacity: 0;
+     visibility: hidden;
+     height: 0;
+     pointer-events: none;
+     padding: 0;
+   }
+   ```
+
+3. CSS trick for building a triangle (commonly used for tooltips or arrows):
+
+   ```css
+   .social-share-panel__down-arrow {
+     display: block;
+     width: 0;
+     height: 0;
+     border-top: 12px solid var(--color-heading);
+     border-left: 12px solid transparent;
+     border-right: 12px solid transparent;
+   }
+   ```
+
+4. The `window.matchMedia()` method allows to respond to CSS media queries in JavaScript.
+
+5. In `addEventListener`, if you use an arrow function, you must explicitly pass the event parameter (e.g., `event` or `e`) to access event details. If you use a regular function expression, `this` refers to the element that triggered the event.
 
 ## Author
 
