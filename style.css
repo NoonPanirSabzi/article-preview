@@ -249,7 +249,7 @@ main {
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
     position:absolute;
-    bottom:-12px;
+    bottom:-11px;
     left: 50%;
     transform: translateX(-50%);
   }
