@@ -254,6 +254,9 @@ main {
     transform: translateX(-50%);
   }
 
+  /* If omitted, share panel won't be able to overflow in desktop on top of 
+     author profile button    
+  */
   .fade-toggle {
     overflow: visible;
   }

@@ -34,7 +34,7 @@ function initialSetup(isDesktopView) {
 function updateLayout(isDesktopView) {
   // Remove all existing event listeners
   elements.authorProfileBtn.removeEventListener("click", toggleSharePanel);
-  elements.socialPanelBtn?.removeEventListener("click", toggleSharePanel);
+  elements.socialPanelBtn.removeEventListener("click", toggleSharePanel);
 
   // Check and maintain share panel state
   const isSharePanelVisible = !elements.sharePanel.classList.contains("hide");
@@ -46,11 +46,18 @@ function updateLayout(isDesktopView) {
   container.appendChild(elements.sharePanel);
 
   // Maintain share panel state
-  if (isSharePanelVisible) {
-    elements.sharePanel.classList.remove("hide");
+  if (isSharePanelVisible) { 
     if (!isDesktopView) {
+      /* Desktop --> Mobile && share panel visible: 
+         author profile, which was visible in Desktop, 
+         now has to hide in Mobile 
+      */
       elements.authorProfile.classList.add("hide");
     } else {
+      /* Mobile --> Desktop && share panel visible:
+         author profile, which was hidden in Mobile,
+         now has to unhide in Desktop
+      */
       elements.authorProfile.classList.remove("hide");
     }
   }
